@@ -18,7 +18,7 @@ let defaultState = {
             let newNotesList = state.Notes
             newNote.id = state.Notes && state.Notes.length ? state.Notes[state.Notes.length-1].id : 1
             newNotesList.push(newNote)
-            return {...state, Notes : newNotesList }
+            return {...state, Notes : [...newNotesList] }
         case "UPDATE_NOTES":
             return {...state}
         case "DELETE_NOTE":

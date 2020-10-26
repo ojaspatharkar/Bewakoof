@@ -8,7 +8,7 @@ class NotesList extends Component {
         return (
             <div style={{ width: 200, paddingTop: 10 }}>
                 {
-                    this.props.Notes.map((note, idx) => {
+                    Notes.map((note, idx) => {
                         let date = new Date(+note.timeStamp)
                         
                         return (
@@ -29,6 +29,7 @@ class NotesList extends Component {
 }
 
 function mapStateToProps(state) {
+    console.log(state.NotesReducer.Notes)
     return {
         Notes: state.NotesReducer.Notes
     }
