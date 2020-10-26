@@ -1,14 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import {UpdateNote} from '../Actions'
 class NotesEditor extends Component {
+    state = {
+        title : "",
+        content : ""
+    }
+    
 
     onEditTitle = (e) =>{
-
+        let {selectedNote, UpdateNote} = this.props
+        this.setState({title : e.target.value}, ()=>{
+            selectedNote.title = this.state.title
+            UpdateNote(selectedNote)
+        })
     }
 
     onEditContent = (e)=>{
-
+        let {selectedNote, UpdateNote} = this.props
+        selectedNote.content = e.target.value
+        UpdateNote(selectedNote)
     }
     render() {
         let {selectedNote} = this.props
@@ -17,8 +28,8 @@ class NotesEditor extends Component {
         }
         return (
             <div>
-                <input value={selectedNote.title} onBlur={this.onEditTitle}/>
-                <textarea value={selectedNote.content} onBlur={this.onEditContent}/>
+                <input value={selectedNote.title} onChange={this.onEditTitle}/>
+                <textarea value={selectedNote.content} onChange={this.onEditContent}/>
             </div>
         );
     }
@@ -27,12 +38,17 @@ class NotesEditor extends Component {
 function mapStateToProps(state) {
     console.log(state.NotesReducer.Notes)
     return {
-        Notes: state.NotesReducer.Notes
+        Notes: state.NotesReducer.Notes,
+        selectedNote : state.NotesReducer.selectedNote
     }
 }
 
-function mapDispatchToProps() {
-    return {}
+function mapDispatchToProps(dispatch) {
+    return {    
+        UpdateNote(note){
+            dispatch(UpdateNote(note))
+        }
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(NotesEditor);

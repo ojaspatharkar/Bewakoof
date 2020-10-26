@@ -13,7 +13,8 @@ class EditBar extends Component {
                 id : 0,
                 title : "",
                 timeStamp : new Date().getTime(),
-                content : ""
+                content : "",
+                isSelected : true
             }
         if(this.props.CreateNote){
             this.props.CreateNote(emptyNote)
