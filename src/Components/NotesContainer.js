@@ -5,10 +5,18 @@ import NotesEditor from './NotesEditor';
 import NotesList from './NotesList';
 class NotesContainer extends Component {
 
+    state={
+        selectedNote : null
+    }
+
     componentDidMount() {
         
     }
     
+    onSelectNote = (note)=>{
+        this.setState({selectedNote : note})
+    }
+
     render() {
         return (
             <div>
@@ -21,10 +29,10 @@ class NotesContainer extends Component {
                 </div>
                 <div className="row">
                     <div className="col-3">
-                        <NotesList/>
+                        <NotesList selectedNote={this.state.selectedNote} onSelect = {this.onSelectNote}/>
                     </div>
                     <div className="col-9">
-                        <NotesEditor/>
+                        <NotesEditor selectedNote={this.state.selectedNote}/>
                     </div>
                 </div>
                 </div>

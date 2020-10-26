@@ -2,9 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class NotesList extends Component {
+
+    onSelect(note){
+        this.props.onSelect(note)
+    }
+
     render() {
         console.log(this.props.Notes)
-        let {Notes, selectedId} = this.props
+        let {Notes, selectedNote} = this.props
         return (
             <div style={{ width: 200, paddingTop: 10 }}>
                 {
@@ -12,7 +17,7 @@ class NotesList extends Component {
                         let date = new Date(+note.timeStamp)
                         
                         return (
-                            <div key={idx} className='list-item' style={note.id == selectedId ? { backgroundColor:'orange', color:'black' } : null}>
+                            <div onClick={()=>{this.onSelect(note)}} key={idx} className='list-item' style={selectedNote && note.id == selectedNote.id ? { backgroundColor:'orange', color:'black' } : null}>
                                 <div><span style={{ fontSize: 20 }}>{note.title}</span></div>
                                 <div>
                                     <span style={{ fontSize: 10 }}>{date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()}</span>
